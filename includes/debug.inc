@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Debugging helper - runs data through print_r() and wraps in <pre>;
+ * @param  [type] $data [description]
+ * @return [type]       [description]
+ */
 function print_rr($data) {
   if ($_SERVER['REMOTE_ADDR'] !== '127.0.0.1') {
     return;
