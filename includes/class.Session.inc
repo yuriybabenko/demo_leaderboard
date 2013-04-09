@@ -1,8 +1,28 @@
 <?php
 
-class Session implements iDataSource {
-  public function __construct() {
+/**
+ * Session data source handling.
+ */
+class Session extends Data implements iDataSource {
+  protected $_contestants = array();
+
+  public function __construct($contestants) {
     session_start();
+
+    // pull up existing contestant data from session
+    if ($existing = $this->get('contestants')) {
+      $this->_contestants = $existing;
+    }
+    // otherwise instantiate the contestants
+    else {
+      foreach ($contestants as $name => $score) {
+        $key = $this->contestantKey($name);
+
+        $this->_contestants[$key] = new Contestant($name, $score);
+      }
+
+      $this->set('contestants', $this->_contestants);
+    }
   }
 
   /**
@@ -23,14 +43,16 @@ class Session implements iDataSource {
     if (isset($_SESSION[$name])) {
       return $_SESSION[$name];
     }
+
+    return FALSE;
   }
-  
+
   /**
-   * Returns all stored data.
+   * Returns all contestants.
    * @return [type] [description]
    */
-  public function all() {
-    return $_SESSION;
+  public function getContestants() {
+    return $this->_contestants;
   }
 
   /**
