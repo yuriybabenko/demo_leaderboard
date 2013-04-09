@@ -1,11 +1,22 @@
+<?php
+  $base_path = 'http://bbtv/';
+
+  require_once('./includes/debug.inc');
+  require_once('./includes/interface.iDataSource.inc');
+  require_once('./includes/class.Session.inc');
+  
+  $data = new Session();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
   <title>Leaderboard</title>
 
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="<?php echo $base_path; ?>css/style.css">
 
-  <script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" src="<?php echo $base_path; ?>js/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" src="<?php echo $base_path; ?>js/bbtv.js"></script>
 </head>
 <body>
   <div id="outer">
